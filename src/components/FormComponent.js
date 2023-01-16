@@ -53,70 +53,22 @@ const FormComponent = ({ data }) => {
   return (
     <>
       <Form onSubmit={submitHandler}>
-        <Form.Group className="box" md="3" controlId="validationCustom05">
+        <Form.Group className="box form-control" md="3" controlId="validationCustom05">
           <Form.Label className="label-text">name : </Form.Label>
           <Form.Control
             onChange={onChangeHandler}
-            name="name"
-            value={state.name}
+            name="fullname"
+            value={state.fullname}
             type="text"
             required
           />
-          {errors && errors.name && (
+          {errors && errors.fullname && (
             <Form.Control.Feedback className="error-text" type="invalid">
-              {errors.name}
+              {errors.fullname}
             </Form.Control.Feedback>
           )}
         </Form.Group>
-        {/* // */}
-        <Form.Group className="box" md="3" controlId="validationCustom05">
-          <Form.Label className="label-text">last name : </Form.Label>
-          <Form.Control
-            onChange={onChangeHandler}
-            name="lastName"
-            value={state.lastName}
-            type="text"
-            required
-          />
-          {errors && errors.lastName && (
-            <Form.Control.Feedback className="error-text" type="invalid">
-              {errors.lastName}
-            </Form.Control.Feedback>
-          )}
-        </Form.Group>
-        {/* // */}
-        <Form.Group className="box" md="3" controlId="validationCustom05">
-          <Form.Label className="label-text">password : </Form.Label>
-          <Form.Control
-            onChange={onChangeHandler}
-            name="password"
-            value={state.password}
-            type="password"
-            required
-          />
-          {errors && errors.password && (
-            <Form.Control.Feedback className="error-text" type="invalid">
-              {errors.password}
-            </Form.Control.Feedback>
-          )}
-        </Form.Group>
-        {/*  */}
-        <Form.Group className="box" md="3" controlId="validationCustom05">
-          <Form.Label className="label-text">confirmPassword : </Form.Label>
-          <Form.Control
-            onChange={onChangeHandler}
-            name="confirmPassword"
-            value={state.confirmPassword}
-            type="password"
-            required
-          />
-          {errors && errors.confirmPassword && (
-            <Form.Control.Feedback className="error-text" type="invalid">
-              {errors.confirmPassword}
-            </Form.Control.Feedback>
-          )}
-        </Form.Group>
-        {/*  */}
+        
         <Form.Group className="box" md="3" controlId="validationCustom05">
           <Form.Label className="label-text">accept rules</Form.Label>
           <Form.Control

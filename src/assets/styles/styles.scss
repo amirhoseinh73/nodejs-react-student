@@ -1,0 +1,168 @@
+@import "./global.scss";
+
+html, body {
+  padding: 0;
+  margin: 0;
+  @include fullscreen
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body{
+  background-color: $color-body;
+  color: $color-text-dark;
+  font-size: 16px;
+  @include fullscreen
+}
+
+#root {
+  @include fullscreen
+}
+
+.App {
+  font-family: sans-serif;
+  text-align: center;
+  @include fullscreen
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  color: $color-text-dark;
+}
+
+.home {
+  @include fullscreen;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  background-image: url("../images/background.jpg");
+  padding: 20px;
+}
+
+.not-found {
+  justify-content: center;
+  color: $color-text;
+}
+
+.title1 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.title2 {
+  margin-bottom: 15px;
+  font-weight: 700;
+}
+
+.description {
+  color: $color-text;
+  margin-bottom: 15px;
+  @include default-text();
+}
+
+.description2 {
+  margin-bottom: 25px;
+  font-weight: 600;
+  @include default-text();
+}
+
+.description2 span {
+  display: block;
+}
+
+button {
+  appearance: none;
+  border: 0;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.btn {
+  @include default-text;
+  @include transition-all;
+  text-decoration: none;
+}
+
+.btn-fill-green,
+.btn-outline-green {
+  border-radius: 8px;
+  padding: 8px 16px;
+  margin: 0 25px;
+}
+
+.btn-fill-green {
+  background-color: $color-btn;
+  color: white;
+  border: 1px solid transparent;
+}
+
+.btn-outline-green {
+  background-color: white;
+  color: $color-btn;
+  border: 1px solid $color-btn;
+}
+
+.btn-fill-green:hover {
+  background-color: white;
+  color: $color-btn;
+  border-color: $color-btn;
+}
+
+.btn-outline-green:hover {
+  background-color: $color-btn;
+  color: white;
+  border-color: transparent;
+}
+
+form{
+  padding:10px;
+}
+
+.error-text {
+  color: $color-error;
+  @include default-text();
+  width:100%;
+  float:left;
+  text-align: left;
+}
+
+.label-text {
+  @include default-text();
+  color: $color-text;
+}
+
+.button-basic {
+  border: none;
+  padding: 10px 30px;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius : 5px;
+  color:$color-body;
+}
+
+.button-submit  {
+  @extend .button-basic;
+  background-color: $color-success;
+}
+
+.box { 
+  margin-bottom: 10px;
+  width:100%;
+  display: table;
+  
+  input { 
+    @include basic-input();
+    float:left;
+    
+  }
+  label {
+    margin-right:10px;
+    float:left;
+    margin-top:5px;
+  }
+}

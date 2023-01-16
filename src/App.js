@@ -1,22 +1,17 @@
-import FormComponent from "./FormComponent";
-import "./styles.scss";
+import "./assets/styles/styles.scss";
+import { Route, Routes } from "react-router-dom";
+import Home from './pages/Home';
+import Register from './pages/Register';
+import NotFound from "./pages/NotFound";
 
 export default function App() {
-  const fakeData = {
-    name: "ali",
-    lastName: "alavi",
-    password: "123456",
-    confirmPassword: "123456",
-    acceptedRules: true
-  };
   return (
     <div className="App">
-      <div className="advertisment">
-        {" "}
-        <p>*** advertisment ***</p>{" "}
-      </div>
-      <h1>Login Form</h1>
-      <FormComponent data={fakeData} />
+      <Routes>
+        <Route path="/" element={<Home/>} />
+        <Route path="/register" element={<Register/>} />
+        <Route path="*" element={<NotFound/>}/>
+      </Routes>
     </div>
   );
 }

@@ -1,0 +1,29 @@
+$color-body: #eee;
+$color-error:red;
+$color-success:green;
+$color-text: #909090;
+$color-text-dark: #222222;
+$color-btn: #0d62da;
+
+@mixin default-text {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+@mixin basic-input {
+  height:25px;
+  color:rgb(87, 79, 79);
+  border:1px solid rgb(190, 185, 185);
+  border-radius: 3px;
+  padding:0 5px;
+  background-color:#fff;
+}
+
+@mixin fullscreen {
+  width: 100%;
+  height: 100%;
+}
+
+@mixin transition-all {
+  transition: all 300ms linear;
+}
