@@ -1,75 +1,157 @@
 import { useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
-import "./styles.scss";
+import { validateEmail } from "../helpers/validations";
+import { STATES } from "../helpers/states";
+
+const inputFields = {
+  firstName: "",
+  lastName: "",
+  email: "",
+  state: "",
+  address: "",
+}
+
+const defaultData = {
+  ...inputFields,
+  acceptedRules: true
+}
 
 const defaultError = {
-  name: "",
-  lastName: "",
-  password: "",
-  confirmPassword: "",
+  ...inputFields,
   acceptedRules: ""
 };
-const FormComponent = ({ data }) => {
-  const [state, setState] = useState(data);
-  const onChangeHandler = (event) => {
-    setState({ ...state, [event.target.name]: event.target.value });
-  };
+
+const FormComponent = () => {
+  const [state, setState] = useState(defaultData);
   const [errors, setErrors] = useState(defaultError);
   const [hasRequested, setHasRequested] = useState(false);
+  
+  const setStateByKeyValue = (key, value) => setState({ ...state, [key]: value })
+  const onChangeHandler = (event) => setStateByKeyValue(event.target.name, event.target.value)
+
   const submitHandler = () => {
-    // console.log("state", state);
-    setErrors(defaultError);
-    if (state.name.length < 3)
-      setErrors({ ...errors, name: "name could not be less than 3" });
-    if (state?.lastName.length < 3)
-      setErrors({ ...errors, lastName: "lastName could not be less than 3" });
-    if (state?.password.length < 6)
-      setErrors({ ...errors, password: "password could not be less than 6" });
-    if (!state?.acceptedRules)
-      setErrors({ ...errors, acceptedRules: "please accept rules" });
-    if (state?.password !== state.confirmPassword)
-      setErrors({
-        ...errors,
-        confirmPassword: "confirmPassword is not equal to password"
-      });
+    // setErrors(defaultError)
+
+    if (state.firstName.length < 3) setErrors({ ...errors, firstName: "firstName could not be less than 3 characters" });
+    if (state.lastName.length < 3) setErrors({ ...errors, lastName: "lastName could not be less than 3 characters" });
+    if (!validateEmail(state.email)) setErrors({ ...errors, email: "email format not correct" });
+    if (state.state.length < 2) setErrors({ ...errors, state: "please choose your state" });
+    if (state?.address.length < 5 ) setErrors({ ...errors, state: "address could not be less than 5 characters" });
+    if (!state.acceptedRules) setErrors({ ...errors, acceptedRules: "please accept rules" });
 
     setHasRequested(true);
-
-    // console.log("errors", errors);
   };
 
   useEffect(() => {
     if (
       hasRequested &&
-      !errors.name.trim() &&
+      !errors.firstName.trim() &&
       !errors.lastName.trim() &&
-      !errors.password.trim() &&
-      errors.acceptedRules == false &&
-      !errors.confirmPassword.trim()
+      !errors.email.trim() &&
+      !errors.state.trim() &&
+      !errors.address.trim() &&
+      !errors.acceptedRules
     )
-      alert("welcome dear " + state.name);
-    // else alert(Object.values(errors));
-  }, [errors, hasRequested]);
+    alert("welcome dear " + state.firstName);
+  }, []);
+
+
   return (
     <>
-      <Form onSubmit={submitHandler}>
-        <Form.Group className="box form-control" md="3" controlId="validationCustom05">
-          <Form.Label className="label-text">name : </Form.Label>
+      <Form className="form-center">
+        <Form.Group className="inputbox" md="3" controlId="validationFirstName">
+          <Form.Label className="label-text">Firstname : </Form.Label>
           <Form.Control
+            className="flex-input"
             onChange={onChangeHandler}
-            name="fullname"
-            value={state.fullname}
+            value={state.firstName}
+            name="firstName"
             type="text"
             required
           />
-          {errors && errors.fullname && (
+          {errors && errors.firstName && (
             <Form.Control.Feedback className="error-text" type="invalid">
-              {errors.fullname}
+              {errors.firstName}
+            </Form.Control.Feedback>
+          )}
+        </Form.Group>
+
+        <Form.Group className="inputbox" md="3" controlId="validationLastName">
+          <Form.Label className="label-text">Lastname : </Form.Label>
+          <Form.Control
+            className="flex-input"
+            onChange={onChangeHandler}
+            value={state.lastName}
+            name="lastName"
+            type="text"
+            required
+          />
+          {errors && errors.lastName && (
+            <Form.Control.Feedback className="error-text" type="invalid">
+              {errors.lastName}
+            </Form.Control.Feedback>
+          )}
+        </Form.Group>
+
+        <Form.Group className="inputbox" md="3" controlId="validationEmail">
+          <Form.Label className="label-text">Email : </Form.Label>
+          <Form.Control
+            className="flex-input"
+            onChange={onChangeHandler}
+            value={state.email}
+            name="email"
+            type="text"
+            required
+          />
+          {errors && errors.email && (
+            <Form.Control.Feedback className="error-text" type="invalid">
+              {errors.email}
+            </Form.Control.Feedback>
+          )}
+        </Form.Group>
+
+        <Form.Group className="inputbox" md="3" controlId="validationState">
+          <Form.Label className="label-text">State : </Form.Label>
+          <Form.Select
+            className="flex-input"
+            onChange={onChangeHandler}
+            value={state.state}
+            name="state"
+            required
+          >
+            <option value="">choose</option>
+            {
+              STATES.map(state => {
+                return (
+                  <option key={state.abbreviation} value={state.abbreviation}>{state.name}</option>
+                )
+              })
+            }
+          </Form.Select>
+          {errors && errors.state && (
+            <Form.Control.Feedback className="error-text" type="invalid">
+              {errors.state}
+            </Form.Control.Feedback>
+          )}
+        </Form.Group>
+
+        <Form.Group className="inputbox" md="3" controlId="validationAddress">
+          <Form.Label className="label-text">Address : </Form.Label>
+          <Form.Control
+            className="flex-input"
+            onChange={onChangeHandler}
+            value={state.address}
+            name="address"
+            type="text"
+          />
+          {errors && errors.address && (
+            <Form.Control.Feedback className="error-text" type="invalid">
+              {errors.address}
             </Form.Control.Feedback>
           )}
         </Form.Group>
         
-        <Form.Group className="box" md="3" controlId="validationCustom05">
+        <Form.Group className="checkbox" md="3" controlId="validationAcceptRules">
           <Form.Label className="label-text">accept rules</Form.Label>
           <Form.Control
             onChange={(e) =>
@@ -87,8 +169,8 @@ const FormComponent = ({ data }) => {
           )}
         </Form.Group>
       </Form>
-      <Button className="button-submit" onClick={submitHandler}>
-        SUBMITT
+      <Button className="btn-submit" type="submit" onClick={submitHandler}>
+        SUBMIT
       </Button>
     </>
   );

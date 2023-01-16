@@ -8,6 +8,7 @@ html, body {
 
 * {
   box-sizing: border-box;
+  outline: none;
 }
 
 body{
@@ -39,10 +40,11 @@ h1, h2, h3, h4, h5, h6 {
   justify-content: flex-start;
   align-items: center;
   background-image: url("../images/background.jpg");
-  padding: 20px;
+  padding: 20px 60px;
 }
 
 .not-found {
+  @extend .home;
   justify-content: center;
   color: $color-text;
 }
@@ -59,15 +61,15 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .description {
+  @include default-text();
   color: $color-text;
   margin-bottom: 15px;
-  @include default-text();
 }
 
 .description2 {
+  @include default-text();
   margin-bottom: 25px;
   font-weight: 600;
-  @include default-text();
 }
 
 .description2 span {
@@ -82,87 +84,121 @@ button {
 }
 
 .btn {
-  @include default-text;
-  @include transition-all;
+  @include default-text();
+  @include transition-all();
   text-decoration: none;
 }
 
-.btn-fill-green,
-.btn-outline-green {
+.btn-fill-blue,
+.btn-outline-blue {
   border-radius: 8px;
   padding: 8px 16px;
   margin: 0 25px;
 }
 
-.btn-fill-green {
+.btn-fill-blue {
   background-color: $color-btn;
   color: white;
   border: 1px solid transparent;
+
+  &:hover {
+    background-color: white;
+    color: $color-btn;
+    border-color: $color-btn;
+  }
 }
 
-.btn-outline-green {
+.btn-outline-blue {
   background-color: white;
   color: $color-btn;
   border: 1px solid $color-btn;
-}
 
-.btn-fill-green:hover {
-  background-color: white;
-  color: $color-btn;
-  border-color: $color-btn;
-}
-
-.btn-outline-green:hover {
-  background-color: $color-btn;
-  color: white;
-  border-color: transparent;
-}
-
-form{
-  padding:10px;
+  &:hover {
+    background-color: $color-btn;
+    color: white;
+    border-color: transparent;
+  }
 }
 
 .error-text {
-  color: $color-error;
   @include default-text();
-  width:100%;
-  float:left;
-  text-align: left;
+  color: $color-error;
 }
 
 .label-text {
   @include default-text();
-  color: $color-text;
 }
 
-.button-basic {
-  border: none;
-  padding: 10px 30px;
-  text-align: center;
-  font-size: 16px;
-  cursor: pointer;
-  border-radius : 5px;
-  color:$color-body;
-}
-
-.button-submit  {
-  @extend .button-basic;
+.btn-submit {
+  @extend .btn-fill-blue;
+  border-color: $color-success;
   background-color: $color-success;
+
+  &:hover {
+    background-color: white;
+    color: $color-success;
+    border-color: $color-success;
+  }
 }
 
-.box { 
-  margin-bottom: 10px;
-  width:100%;
-  display: table;
-  
-  input { 
-    @include basic-input();
-    float:left;
-    
+.form-center {
+  display: flex;
+  flex-direction: column;
+
+  & .inputbox {
+    width: 40%;
+    margin: 0 auto 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    text-transform: capitalize;
+
+    & .flex-input {
+      @include basic-input();
+      @include transition-all();
+      flex: 1;
+      width: 60%;
+
+      &:hover,
+      &:focus {
+        box-shadow: 0 0 6px 1px $color-shadow;
+      }
+    }
+
+    & label {
+      margin-right: 10px;
+      margin-top: 5px;
+      flex: 0 0 40%;
+      text-align: left;
+    }
   }
-  label {
-    margin-right:10px;
-    float:left;
-    margin-top:5px;
+
+  & .checkbox {
+    width: 40%;
+    margin: auto;
+    text-align: left;
+    text-transform: capitalize;
+    margin-bottom: 30px;
+
+    & input {
+      width: 18px;
+      height: 18px;
+      margin: 0 10px;
+      vertical-align: middle;
+    }
   }
+
+  & .invalid-feedback {
+    display: block;
+    width: 100%;
+    flex: 0 0 100%;
+    text-align: left;
+    margin-top: 10px;
+  }
+}
+
+.my-4 {
+  margin-top: 30px;
+  margin-bottom: 40px;
 }

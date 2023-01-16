@@ -4,6 +4,7 @@ $color-success:green;
 $color-text: #909090;
 $color-text-dark: #222222;
 $color-btn: #0d62da;
+$color-shadow: #bbb;
 
 @mixin default-text {
   font-size: 14px;
@@ -11,12 +12,13 @@ $color-btn: #0d62da;
 }
 
 @mixin basic-input {
-  height:25px;
-  color:rgb(87, 79, 79);
-  border:1px solid rgb(190, 185, 185);
-  border-radius: 3px;
-  padding:0 5px;
-  background-color:#fff;
+  height: 30px;
+  color: $color-text;
+  border: 1px solid $color-shadow;
+  border-radius: 8px;
+  background-color:white;
+  box-shadow: 0 0 2px 0 $color-shadow;
+  padding: 4px 8px;
 }
 
 @mixin fullscreen {
