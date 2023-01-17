@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { validateEmail } from "../helpers/validations";
 import { STATES } from "../helpers/states";
+import { requestPost } from "../helpers/fetch";
+import { createUserRoute } from "../helpers/routes";
 
 const inputFields = {
   firstName: "",
@@ -41,11 +43,11 @@ const FormComponent = () => {
     if (!state.acceptedRules) formErrors.acceptedRules = "please accept rules"
 
     setErrors(formErrors)
-    
+
     setHasRequested(true);
   };
 
-  useEffect(() => {
+  useEffect( () => {
     if (
         !hasRequested ||
         errors.firstName.trim() ||
@@ -56,8 +58,12 @@ const FormComponent = () => {
         errors.acceptedRules
       ) return setHasRequested(false)
     
-    alert("welcome dear " + state.firstName);
-    setState(defaultData)
+    const callback = () => {
+      alert(`thank you for your register dear ${state.firstName} ${state.lastName}`);
+      setState(defaultData)
+    }
+
+    requestPost( createUserRoute, callback, state )
 
   }, [errors, hasRequested]);
 
