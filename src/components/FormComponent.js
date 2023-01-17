@@ -13,7 +13,7 @@ const inputFields = {
 
 const defaultData = {
   ...inputFields,
-  acceptedRules: true
+  acceptedRules: false
 }
 
 const defaultError = {
@@ -30,30 +30,36 @@ const FormComponent = () => {
   const onChangeHandler = (event) => setStateByKeyValue(event.target.name, event.target.value)
 
   const submitHandler = () => {
-    // setErrors(defaultError)
+    setErrors({...defaultError})
 
-    if (state.firstName.length < 3) setErrors({ ...errors, firstName: "firstName could not be less than 3 characters" });
-    if (state.lastName.length < 3) setErrors({ ...errors, lastName: "lastName could not be less than 3 characters" });
-    if (!validateEmail(state.email)) setErrors({ ...errors, email: "email format not correct" });
-    if (state.state.length < 2) setErrors({ ...errors, state: "please choose your state" });
-    if (state?.address.length < 5 ) setErrors({ ...errors, state: "address could not be less than 5 characters" });
-    if (!state.acceptedRules) setErrors({ ...errors, acceptedRules: "please accept rules" });
+    const formErrors = {...defaultError}
+    if (state.firstName.length < 3) formErrors.firstName = "firstName could not be less than 3 characters"
+    if (state.lastName.length < 3) formErrors.lastName = "lastName could not be less than 3 characters"
+    if (!validateEmail(state.email)) formErrors.email = "email format not correct"
+    if (state.state.length < 2) formErrors.state = "please choose your state"
+    if (state.address.length < 5 ) formErrors.address = "address could not be less than 5 characters"
+    if (!state.acceptedRules) formErrors.acceptedRules = "please accept rules"
 
+    setErrors(formErrors)
+    
     setHasRequested(true);
   };
 
   useEffect(() => {
     if (
-      hasRequested &&
-      !errors.firstName.trim() &&
-      !errors.lastName.trim() &&
-      !errors.email.trim() &&
-      !errors.state.trim() &&
-      !errors.address.trim() &&
-      !errors.acceptedRules
-    )
+        !hasRequested ||
+        errors.firstName.trim() ||
+        errors.lastName.trim() ||
+        errors.email.trim() ||
+        errors.state.trim() ||
+        errors.address.trim() ||
+        errors.acceptedRules
+      ) return setHasRequested(false)
+    
     alert("welcome dear " + state.firstName);
-  }, []);
+    setState(defaultData)
+
+  }, [errors, hasRequested]);
 
 
   return (
