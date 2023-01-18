@@ -3,11 +3,11 @@ import cors from "cors"
 import bodyParser from "body-parser"
 import multer from "multer"
 import userRoutes from "./users.js";
-import { app } from '../config.js';
+import { FRONT_URL, app } from '../config.js';
 
 app.use(express.json())
 
-const whitelist = ["http://localhost:3000"]
+const whitelist = [FRONT_URL]
 const corsOptions = {
   origin: function (origin, callback) {
     if (!origin || whitelist.indexOf(origin) !== -1) {
