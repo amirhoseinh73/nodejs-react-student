@@ -7,6 +7,4 @@ export const app = express()
 
 export const DB_URL = process.env.DB_URL || ""
 
-export const PORT = process.env.APP_PORT || 4000
-
-export const QueryLimit = 1
+export const PORT = process.env.APP_PORT || 8000

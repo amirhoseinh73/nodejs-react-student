@@ -2,19 +2,12 @@ import express from "express"
 import { Messages } from "../helpers/messages.js"
 import User from "../models/user.js"
 import { validateEmail } from "../helpers/validations.js"
-// import { QueryLimit } from "../config.js"
 
 const router = express.Router()
 
 // get all users
 router.get("/", async ( req, res ) => {
   try {
-
-    // const page = req.params.page
-    // const limit = QueryLimit
-    // const skip = (page - 1)*limit // page start from one, queries start from zero
-
-    // const users = await User.find().skip(skip).limit(limit)
     const users = await User.find()
     return res.status(200).json({
       status: 200,
