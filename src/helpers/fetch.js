@@ -8,9 +8,6 @@ export const requestPost = async ( url, callback, data ) => {
 
   return await fetch( url , {
       method: "POST",
-      headers: {
-        "content-type": "application/json"
-      },
       body: formData,
   } )
   .then( ( response ) => response.json() )

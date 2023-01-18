@@ -6,6 +6,4 @@ export const Messages = {
 
   userNotFound: "user not found.",
   userCreated: "user created successfully.",
-  userDeleted: "user deleted successfully.",
-  userUpdated: "user updated successfully."
 }

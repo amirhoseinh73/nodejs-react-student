@@ -58,9 +58,13 @@ const FormComponent = () => {
         errors.acceptedRules
       ) return setHasRequested(false)
     
-    const callback = () => {
-      alert(`thank you for your register dear ${state.firstName} ${state.lastName}`);
-      setState(defaultData)
+    const callback = (respond) => {
+      if ( Number(respond.status) === 201 ) {
+        alert(`thank you for your register dear ${state.firstName} ${state.lastName}`);
+        setState(defaultData)
+      } else {
+        alert(respond.message)
+      }
     }
 
     requestPost( createUserRoute, callback, state )
