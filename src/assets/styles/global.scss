@@ -3,8 +3,10 @@ $color-error:red;
 $color-success:green;
 $color-text: #909090;
 $color-text-dark: #222222;
-$color-btn: #0d62da;
+$color-btn: #2a69c2;
 $color-shadow: #bbb;
+$color-table-row-light: #ccc;
+$color-table-row-dark: #ddd;
 
 @mixin default-text {
   font-size: 14px;

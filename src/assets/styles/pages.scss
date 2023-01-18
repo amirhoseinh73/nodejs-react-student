@@ -1,0 +1,217 @@
+.home {
+  @include fullscreen;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 20px 60px;
+}
+
+.not-found {
+  @extend .home;
+  justify-content: center;
+  color: $color-text;
+}
+
+.title1 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.title2 {
+  margin-bottom: 15px;
+  font-weight: 700;
+}
+
+.description {
+  @include default-text();
+  color: $color-text;
+  margin-bottom: 15px;
+}
+
+.description2 {
+  @include default-text();
+  margin-bottom: 25px;
+  font-weight: 600;
+}
+
+.description2 span {
+  display: block;
+}
+
+.btn {
+  @include default-text();
+  @include transition-all();
+  text-decoration: none;
+}
+
+.btn-fill-blue,
+.btn-outline-blue {
+  border-radius: 8px;
+  padding: 8px 16px;
+  margin: 0 25px;
+}
+
+.btn-fill-blue {
+  background-color: $color-btn;
+  color: white;
+  border: 1px solid transparent;
+
+  &:hover {
+    background-color: white;
+    color: $color-btn;
+    border-color: $color-btn;
+  }
+}
+
+.btn-outline-blue {
+  background-color: white;
+  color: $color-btn;
+  border: 1px solid $color-btn;
+
+  &:hover {
+    background-color: $color-btn;
+    color: white;
+    border-color: transparent;
+  }
+}
+
+.error-text {
+  @include default-text();
+  color: $color-error;
+}
+
+.label-text {
+  @include default-text();
+}
+
+.btn-submit {
+  @extend .btn-fill-blue;
+  border-color: $color-success;
+  background-color: $color-success;
+
+  &:hover {
+    background-color: white;
+    color: $color-success;
+    border-color: $color-success;
+  }
+}
+
+.form-center {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  margin: auto;
+
+  & .inputbox {
+    width: 100%;
+    margin: 0 auto 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    text-transform: capitalize;
+
+    & .flex-input {
+      @include basic-input();
+      @include transition-all();
+      flex: 1;
+      width: 60%;
+
+      &:hover,
+      &:focus {
+        box-shadow: 0 0 6px 1px $color-shadow;
+      }
+
+      @media (max-width: 576px) {
+        display: block;
+        width: 100%;
+        flex: 0 0 100%;
+        margin-bottom: 4px;
+      }
+    }
+
+    & label {
+      margin-right: 10px;
+      margin-top: 5px;
+      flex: 0 0 40%;
+      text-align: left;
+
+      @media (max-width: 576px) {
+        display: block;
+        width: 100%;
+        flex: 0 0 100%;
+        margin-bottom: 4px;
+        margin-right: 0;
+      }
+    }
+  }
+
+  & .checkbox {
+    width: 100%;
+    margin: auto;
+    text-align: left;
+    text-transform: capitalize;
+    margin-bottom: 30px;
+
+    & input {
+      width: 18px;
+      height: 18px;
+      margin: 0 10px;
+      vertical-align: middle;
+    }
+  }
+
+  & .invalid-feedback {
+    display: block;
+    width: 100%;
+    flex: 0 0 100%;
+    text-align: left;
+    margin-top: 10px;
+  }
+}
+
+.register-user {
+  width: 100%;
+  padding: 10px;
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 4px 8px;
+
+  & .navbar-text {
+    @include default-text();
+    margin-right: 8px;
+    position: absolute;
+    left: 20px;
+    top: 8px;
+  }
+
+  & .navbar-nav {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    
+    & .nav-item {
+      padding: 4px;
+  
+      & a {
+        @include default-text();
+        text-decoration: none;
+        color: $color-text-dark;
+
+        &:hover {
+          color: lighten($color-text-dark, 60%);
+        }
+      }
+    }
+  }
+}

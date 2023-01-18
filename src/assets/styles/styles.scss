@@ -15,65 +15,23 @@ body{
   background-color: $color-body;
   color: $color-text-dark;
   font-size: 16px;
-  @include fullscreen
+  @include fullscreen();
 }
 
 #root {
-  @include fullscreen
+  @include fullscreen();
 }
 
 .App {
   font-family: sans-serif;
   text-align: center;
-  @include fullscreen
+  @include fullscreen();
+  background-image: url("../images/background.jpg");
 }
 
 h1, h2, h3, h4, h5, h6 {
   margin: 0;
   color: $color-text-dark;
-}
-
-.home {
-  @include fullscreen;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  background-image: url("../images/background.jpg");
-  padding: 20px 60px;
-}
-
-.not-found {
-  @extend .home;
-  justify-content: center;
-  color: $color-text;
-}
-
-.title1 {
-  margin-top: 20px;
-  margin-bottom: 10px;
-  font-weight: 600;
-}
-
-.title2 {
-  margin-bottom: 15px;
-  font-weight: 700;
-}
-
-.description {
-  @include default-text();
-  color: $color-text;
-  margin-bottom: 15px;
-}
-
-.description2 {
-  @include default-text();
-  margin-bottom: 25px;
-  font-weight: 600;
-}
-
-.description2 span {
-  display: block;
 }
 
 button {
@@ -83,122 +41,10 @@ button {
   cursor: pointer;
 }
 
-.btn {
-  @include default-text();
-  @include transition-all();
-  text-decoration: none;
-}
-
-.btn-fill-blue,
-.btn-outline-blue {
-  border-radius: 8px;
-  padding: 8px 16px;
-  margin: 0 25px;
-}
-
-.btn-fill-blue {
-  background-color: $color-btn;
-  color: white;
-  border: 1px solid transparent;
-
-  &:hover {
-    background-color: white;
-    color: $color-btn;
-    border-color: $color-btn;
-  }
-}
-
-.btn-outline-blue {
-  background-color: white;
-  color: $color-btn;
-  border: 1px solid $color-btn;
-
-  &:hover {
-    background-color: $color-btn;
-    color: white;
-    border-color: transparent;
-  }
-}
-
-.error-text {
-  @include default-text();
-  color: $color-error;
-}
-
-.label-text {
-  @include default-text();
-}
-
-.btn-submit {
-  @extend .btn-fill-blue;
-  border-color: $color-success;
-  background-color: $color-success;
-
-  &:hover {
-    background-color: white;
-    color: $color-success;
-    border-color: $color-success;
-  }
-}
-
-.form-center {
-  display: flex;
-  flex-direction: column;
-
-  & .inputbox {
-    width: 40%;
-    margin: 0 auto 20px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    flex-wrap: wrap;
-    text-transform: capitalize;
-
-    & .flex-input {
-      @include basic-input();
-      @include transition-all();
-      flex: 1;
-      width: 60%;
-
-      &:hover,
-      &:focus {
-        box-shadow: 0 0 6px 1px $color-shadow;
-      }
-    }
-
-    & label {
-      margin-right: 10px;
-      margin-top: 5px;
-      flex: 0 0 40%;
-      text-align: left;
-    }
-  }
-
-  & .checkbox {
-    width: 40%;
-    margin: auto;
-    text-align: left;
-    text-transform: capitalize;
-    margin-bottom: 30px;
-
-    & input {
-      width: 18px;
-      height: 18px;
-      margin: 0 10px;
-      vertical-align: middle;
-    }
-  }
-
-  & .invalid-feedback {
-    display: block;
-    width: 100%;
-    flex: 0 0 100%;
-    text-align: left;
-    margin-top: 10px;
-  }
-}
-
 .my-4 {
   margin-top: 30px;
   margin-bottom: 40px;
 }
+
+@import "./pages.scss";
+@import "./table.scss";

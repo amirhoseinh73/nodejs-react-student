@@ -6,8 +6,8 @@ import { requestPost } from "../helpers/fetch";
 import { createUserRoute } from "../helpers/routes";
 
 const inputFields = {
-  firstName: "",
-  lastName: "",
+  firstname: "",
+  lastname: "",
   email: "",
   state: "",
   address: "",
@@ -31,12 +31,13 @@ const FormComponent = () => {
   const setStateByKeyValue = (key, value) => setState({ ...state, [key]: value })
   const onChangeHandler = (event) => setStateByKeyValue(event.target.name, event.target.value)
 
-  const submitHandler = () => {
+  const submitHandler = (e) => {
+    e.preventDefault();
     setErrors({...defaultError})
 
     const formErrors = {...defaultError}
-    if (state.firstName.length < 3) formErrors.firstName = "firstName could not be less than 3 characters"
-    if (state.lastName.length < 3) formErrors.lastName = "lastName could not be less than 3 characters"
+    if (state.firstname.length < 3) formErrors.firstname = "firstname could not be less than 3 characters"
+    if (state.lastname.length < 3) formErrors.lastname = "lastname could not be less than 3 characters"
     if (!validateEmail(state.email)) formErrors.email = "email format not correct"
     if (state.state.length < 2) formErrors.state = "please choose your state"
     if (state.address.length < 5 ) formErrors.address = "address could not be less than 5 characters"
@@ -50,8 +51,8 @@ const FormComponent = () => {
   useEffect( () => {
     if (
         !hasRequested ||
-        errors.firstName.trim() ||
-        errors.lastName.trim() ||
+        errors.firstname.trim() ||
+        errors.lastname.trim() ||
         errors.email.trim() ||
         errors.state.trim() ||
         errors.address.trim() ||
@@ -60,7 +61,7 @@ const FormComponent = () => {
     
     const callback = (respond) => {
       if ( Number(respond.status) === 201 ) {
-        alert(`thank you for your register dear ${state.firstName} ${state.lastName}`);
+        alert(`thank you for your register dear ${state.firstname} ${state.lastname}`);
         setState(defaultData)
       } else {
         alert(respond.message)
@@ -71,23 +72,22 @@ const FormComponent = () => {
 
   }, [errors, hasRequested]);
 
-
   return (
     <>
-      <Form className="form-center">
+      <Form className="form-center" onSubmit={submitHandler}>
         <Form.Group className="inputbox" md="3" controlId="validationFirstName">
           <Form.Label className="label-text">Firstname : </Form.Label>
           <Form.Control
             className="flex-input"
             onChange={onChangeHandler}
-            value={state.firstName}
-            name="firstName"
+            value={state.firstname}
+            name="firstname"
             type="text"
             required
           />
-          {errors && errors.firstName && (
+          {errors && errors.firstname && (
             <Form.Control.Feedback className="error-text" type="invalid">
-              {errors.firstName}
+              {errors.firstname}
             </Form.Control.Feedback>
           )}
         </Form.Group>
@@ -97,14 +97,14 @@ const FormComponent = () => {
           <Form.Control
             className="flex-input"
             onChange={onChangeHandler}
-            value={state.lastName}
-            name="lastName"
+            value={state.lastname}
+            name="lastname"
             type="text"
             required
           />
-          {errors && errors.lastName && (
+          {errors && errors.lastname && (
             <Form.Control.Feedback className="error-text" type="invalid">
-              {errors.lastName}
+              {errors.lastname}
             </Form.Control.Feedback>
           )}
         </Form.Group>
@@ -184,10 +184,11 @@ const FormComponent = () => {
             </Form.Control.Feedback>
           )}
         </Form.Group>
+
+        <Button className="btn-submit" type="submit">
+          SUBMIT
+        </Button>
       </Form>
-      <Button className="btn-submit" type="submit" onClick={submitHandler}>
-        SUBMIT
-      </Button>
     </>
   );
 };

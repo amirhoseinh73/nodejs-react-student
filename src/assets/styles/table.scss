@@ -1,0 +1,73 @@
+.list-user {
+  width: 100%;
+  padding: 10px;
+}
+
+.table-container {
+  width: 100%;
+  overflow: auto;
+}
+
+.react-table-users {
+  max-width: 100%;
+  border-collapse: collapse;
+  margin: auto;
+
+  & thead {
+    & tr {
+      background-color: $color-btn;
+      & th {
+        @include default-text();
+        border: 1px solid $color-shadow;
+        padding: 5px 10px;
+        font-weight: 700;
+        font-size: 15px;
+        color: white;
+      }
+    }
+  }
+
+  & tbody {
+    & tr {
+      background-color: $color-table-row-light;
+  
+      &:nth-child(odd) {
+        background-color: $color-table-row-dark;
+      }
+  
+      & td {
+        @include default-text();
+        border: 1px solid $color-shadow;
+        padding: 5px 10px;
+      }
+    }
+  }
+}
+
+.table-footer {
+  margin-top: 25px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  & .table-paginate-btn {
+    @include transition-all();
+    margin: 0 4px;
+    border: 1px solid $color-shadow;
+    background-color: $color-table-row-light;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:hover,
+    &.active {
+      background-color: $color-btn;
+      color: white;
+    }
+  }
+}

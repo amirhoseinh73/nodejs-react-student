@@ -1,14 +1,20 @@
 import express from "express"
 import { Messages } from "../helpers/messages.js"
-import getUser from "../middlewares/getUser.js"
 import User from "../models/user.js"
 import { validateEmail } from "../helpers/validations.js"
+// import { QueryLimit } from "../config.js"
 
 const router = express.Router()
 
 // get all users
 router.get("/", async ( req, res ) => {
   try {
+
+    // const page = req.params.page
+    // const limit = QueryLimit
+    // const skip = (page - 1)*limit // page start from one, queries start from zero
+
+    // const users = await User.find().skip(skip).limit(limit)
     const users = await User.find()
     return res.status(200).json({
       status: 200,
@@ -24,18 +30,26 @@ router.get("/", async ( req, res ) => {
 })
 
 // get user
-router.get("/:id", getUser, async ( req, res ) => {
+router.get("/:key", async ( req, res ) => {
   try {
-    const user = await res.user
+    const key = req.params.key;
+
+    const users = await User.find({
+      $or: [
+        { firstname: { $regex: '.*' + key + '.*' } },
+        { lastname: { $regex: '.*' + key + '.*' } },
+      ],
+    })
+    
     return res.status(200).json({
       status: 200,
       message: Messages.success,
-      data: user
+      data: users
     })
   } catch( err ) {
-    return res.status(404).json({
-      status: 404,
-      message: err.message ? err.message : Messages.failed
+    return res.status(500).json({
+      status: 500,
+      message: Messages.failed
     })
   }
 })
@@ -43,8 +57,8 @@ router.get("/:id", getUser, async ( req, res ) => {
 // create user
 router.post("/", async ( req, res ) => {
 
-  const firstName = req.body.firstName
-  const lastName = req.body.lastName
+  const firstname = req.body.firstname
+  const lastname = req.body.lastname
   const email = req.body.email
   const state = req.body.state
   const address = req.body.address
@@ -56,13 +70,13 @@ router.post("/", async ( req, res ) => {
       address.length < 5 ||
       state.length < 2 ||
       !validateEmail(email) ||
-      firstName.length < 3 ||
-      lastName.length < 3
+      firstname.length < 3 ||
+      lastname.length < 3
     ) throw Messages.wrongData
 
   const user = new User({
-    firstname: firstName,
-    lastname: lastName,
+    firstname: firstname,
+    lastname: lastname,
     email: email,
     state: state,
     address: address
